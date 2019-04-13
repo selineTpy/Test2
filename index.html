@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .header {
+            height: 60px;
+            background-color: rgb(248, 222, 222);
+            text-align: center;
+        }
+
+        .main {
+            height: calc(100% - 120px);
+            background-color: ivory
+        }
+
+        .left {
+            width: 20%;
+            height: 100%;
+            background-color: #ccc;
+            float:left;
+            overflow:hidden;
+        }
+        .right{
+            width: 80%;
+            height: 100%;
+        }
+        .footer {
+            height: 60px;
+            background-color: blanchedalmond;
+        }
+
+        .menu-wrap {
+            width: 200px;
+            margin: 0;
+            padding: 12px;
+            background: #ccc;
+            height: 100%;
+        }
+
+        .menu-wrap>li {
+            height: 40px;
+            line-height: 40px;
+            cursor: pointer;
+        }
+
+        .menu-wrap>li.active {
+            color: #148dff;
+            cursor: default;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">头部</header>
+    <div class="main">
+        <div class="left">
+            <ul class="menu-wrap">
+                <li class="active" data-href="demo1">菜单1按钮</li>
+                <li data-href="demo2">菜单2按钮</li>
+            </ul>
+        </div>
+        <div class="right" id="content"></div>
+    </div>
+    <div class="footer">底部</div>
+    <script src="3rd/js/jquery-3.3.1.min.js"></script>
+    <script src="3rd/js/director.min.js"></script>
+    <script src="3rd/js/template.js"></script>
+    <script src="js/test.js"></script>
+</body>
+</html>
