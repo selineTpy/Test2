@@ -10,8 +10,7 @@
         * {
             padding: 0;
             margin: 0;
-            width: 100%;
-            height: 100%;
+            
         }
 
         .header {
@@ -34,8 +33,10 @@
         }
 
         .right {
-            width: 80%;
-            height: 100%;
+            width: 600px;
+            height: 600px;
+            overflow: hidden;
+            
         }
 
         .footer {
@@ -75,6 +76,7 @@
             <ul class="menu-wrap">
                 <li class="active" data-href="demo1">菜单1按钮</li>
                 <li data-href="demo2">菜单2按钮</li>
+                <li data-href="template">天气服务</li>
             </ul>
         </div>
         <div class="right" id="content"></div>
@@ -84,6 +86,7 @@
     <script src="3rd/js/director.min.js"></script>
     <script src="3rd/js/template.js"></script>
     <script src="js/test.js"></script>
+    <script src="public/template.js"></script><!--引入模板的公共文件-->
 </body>
 
 </html>

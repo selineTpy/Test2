@@ -122,10 +122,12 @@
     
         // 获取天气
         function getWeateherInfo() {
+            //请求json数据
             $.getJSON('./json/weather.json', function (data) {
     
                 data.today.condition.qul = getAirQul(data.today.air_qul.value);
                 var html = template("_tpl_weather", {
+                    //当前的天气
                     current: data.today,
                     notice: data.list.forecast
                 });
