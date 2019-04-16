@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>flex</title>
+    <style>
+        .flex {
+            display: flex;
+        }
+
+        .flex-ver {
+            flex-direction: column;
+            display: flex;
+
+        }
+
+
+        .flex-auto {
+            flex: auto;
+        }
+
+        .flex-wrap {
+            height: 1050px;
+            width: 1050px;
+
+        }
+
+        .float-wrap {
+            width: 1050px;
+            height: 360px;
+        }
+
+        .weather-item {
+            width: 150px;
+            background: #FFFFFF;
+            border: 1px solid #EDF3FF;
+        }
+
+        .weather-item>p {
+            font-family: PingFangSC-Medium;
+            font-size: 20px;
+            color: #344665;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .p-time{
+            background: #EDF3FF;
+        }
+        .weather-item>p.a{
+            font-family: PingFangSC-Medium;
+            font-size: 20px;
+            color: #CAD3E0;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex-ver flex-wrap">
+
+        <div class="flex" style="background-color: red;height: 360px;">
+            <div class="flex-auto weather-item p-time">
+                <p>今天</p>
+                <p  class="a">01月20</p>
+                <p>多云</p>
+                <p><img src="../images/weather-icon/W1.png"></p>
+                <p>14°~24°</p>
+            </div>
+            <div class="flex-auto weather-item">
+                <p>明天</p>
+                <p class="a">01月21</p>
+                <p>多云</p>
+                <p><img src="../images/weather-icon/W1.png"></p>
+                <p>14°~24°</p>
+            </div>
+            <div class="flex-auto weather-item">
+                <p>后天</p>
+                <p class="a">01月22</p>
+                <p>多云</p>
+                <p><img src="../images/weather-icon/W1.png"></p>
+                <p>14°~24°</p>
+            </div>
+            <div class="flex-auto weather-item">
+                <p>周五</p>
+                <p class="a">01月23</p>
+                <p>多云</p>
+                <p><img src="../images/weather-icon/W1.png"></p>
+                <p>14°~24°</p>
+            </div>
+            <div class="flex-auto weather-item">
+                <p>周六</p>
+                <p class="a">01月24</p>
+                <p>多云</p>
+                <p><img src="../images/weather-icon/W1.png"></p>
+                <p>14°~24°</p>
+            </div>
+            <div class="flex-auto weather-item">
+                <p>周日</p>
+                <p class="a">01月25</p>
+                <p>多云</p>
+                <p><img src="../images/weather-icon/W1.png"></p>
+                <p>14°~24°</p>
+            </div>
+            <div class="flex-auto weather-item">
+                <p>周一</p>
+                <p class="a">01月26</p>
+                <p>多云</p>
+                <p><img src="../images/weather-icon/W1.png"></p>
+                <p>14°~24°</p>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
