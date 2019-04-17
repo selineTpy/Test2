@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+    .main {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: url(../images/weather.png);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+
+    /*上面部分div*/
+    .flex-top {
+        width: 1050px;
+        height: 480px;
+        /*border: 1px solid blueviolet;*/
+        margin: 0 auto;
+        margin-bottom: 160px;
+        position: relative;
+
+    }
+
+    /*上面部分左边div*/
+    .temperature {
+        width: 320px;
+        height: 180px;
+        /*border: 1px solid green;*/
+        position: absolute;
+        top: 50%;
+        margin-left: -90px;
+        left: 90px;
+    }
+
+    .weather-temp {
+        width: 160px;
+        height: 120px;
+        font-family: PingFangSC-Regular;
+        font-size: 120px;
+        color: #FFFFFF;
+        line-height: 120px;
+        margin-right: 4px;
+
+    }
+
+    .weather-forecast {
+        width: 72px;
+        height: 36px;
+        font-family: PingFangSC-Regular;
+        font-size: 36px;
+        color: #FFFFFF;
+        line-height: 36px;
+        margin-right: 12px;
+        margin-bottom: 42px;
+    }
+
+    .air-quality {
+        width: 60px;
+        height: 12px;
+        font-family: PingFangSC-Regular;
+        font-size: 12px;
+        color: #FFFFFF;
+        line-height: 12px;
+        background: rgba(137,200,24,0.70);
+    }
+
+    .weather-wind {
+        width: 100px;
+        height: 28px;
+        font-family: PingFangSC-Medium;
+        font-size: 20px;
+        color: #FFFFFF;
+        margin-top: 30px;
+        margin-right: 50px;
+    }
+
+    .temperature-ratio {
+        width: 103px;
+        height: 28px;
+        font-family: PingFangSC-Medium;
+        font-size: 20px;
+        color: #FFFFFF;
+    }
+
+    /*上面div头部部分div*/
+    .top {
+        width: 240px;
+        height: 40px;
+        background: #FFFFFF;
+        box-shadow: 0 0 6px 0 #CCCCCC;
+        border-radius: 0 0 6px 6px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+    }
+
+    .flex-span {
+        font-family: PingFangSC-Medium;
+        font-size: 20px;
+        color: #CAD3E0;
+        align-content: center;
+        margin-left: 30px;
+
+    }
+    .span-city {
+        font-family: PingFangSC-Medium;
+        font-size: 20px;
+        color: #344665;
+        align-content: center;
+    }
+
+    .weather-image {
+        width: 172px;
+        height: 135px;
+        /*border: 1px solid burlywood;*/
+        float: right;
+        position: absolute;
+        top: 50%;
+        margin-left: -75px;
+        right: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .weather-image img {
+        width: 100%;
+        height: auto;
+    }
+
+    /*下面星期部分*/
+    .content {
+        width: 1050px;
+        height: 360px;
+        /*border: 1px solid red;*/
+        margin: 0 auto;
+    }
+
+    .flex-ver {
+        display: flex;
+       
+    }
+
+    .flex-auto {
+        flex: auto;
+    }
+
+    .weather-time {
+        width: 150px;
+        background: #FFFFFF;
+
+    }
+
+    .p-time {
+        background: #EDF3FF;
+    }
+
+    .week {
+        width: 40px;
+        height: 28px;
+        font-family: PingFangSC-Medium;
+        font-size: 20px;
+        color: #344665;
+        margin-top: 30px;
+        margin-left: 51px;
+        margin-right: 59px;
+    }
+
+    .data-time {
+        width: 85px;
+        height: 28px;
+        font-family: PingFangSC-Medium;
+        font-size: 20px;
+        color: #CAD3E0;
+        margin-left: 32px;
+        margin-right: 33px;
+
+    }
+
+    .weather-state {
+        width: 40px;
+        height: 28px;
+        font-family: PingFangSC-Medium;
+        font-size: 20px;
+        color: #344665;
+        margin-top: 60px;
+        margin-left: 54.5px;
+        margin-right: 55.5px;
+    }
+
+    .weather-map {
+        width: 60px;
+        height: 42px;
+        margin-top: 43px;
+        margin-left: 43px;
+        margin-right: 53px;
+    }
+
+    .forecast-temp {
+        width: 78px;
+        height: 28px;
+        font-family: PingFangSC-Medium;
+        font-size: 20px;
+        color: #344665;
+        margin-top: 30px;
+        margin-left: 36px;
+        margin-right: 36px;
+        margin-bottom: 36px;
+    }
+</style>
+
+<body>
+    <div class="main">
+        <div class="flex-top">
+            <div class="temperature">
+                <p>
+                    <span class="weather-temp">18°</span>
+                    <span class="weather-forecast">小雨</span>
+                    <span class="air-quality">空气质量优</span>
+                </p>
+                <p>
+                    <span class="weather-wind">南风<三级</span> <span class="temperature-ratio">温度：70%</span>
+                </p>
+            </div>
+            <div class="top">
+                <span class="flex-span span-city">深圳</span>
+                <span class="flex-span">北京</span>
+                <span class="flex-span">上海</span>
+            </div>
+            <div class="weather-image"><img src="../images/weather-icon/W1.png"></div>
+        </div>
+        <div class="content">
+            <div class="flex-ver flex-wrap">
+                <div class="flex-auto weather-time p-time">
+                    <p class="week">今天</p>
+                    <p class="data-time">01月20日</p>
+                    <p class="weather-state">多云</p>
+                    <p class=" weather-map"><img src="../images/weather-icon/W1.png"></p>
+                    <p class="forecast-temp">14°～24°</p>
+                </div>
+                <div class="flex-auto weather-time">
+                    <p class="week">明天</p>
+                    <p class="data-time">01月21日</p>
+                    <p class="weather-state">多云</p>
+                    <p class=" weather-map"><img src="../images/weather-icon/W1.png"></p>
+                    <p class="forecast-temp">14°～24°</p>
+                </div>
+                <div class="flex-auto weather-time">
+                    <p class="week">后天</p>
+                    <p class="data-time">01月22日</p>
+                    <p class="weather-state">多云</p>
+                    <p class=" weather-map"><img src="../images/weather-icon/W1.png"></p>
+                    <p class="forecast-temp">14°～24°</p>
+                </div>
+                <div class="flex-auto weather-time">
+                    <p class="week">周五</p>
+                    <p class="data-time">01月23日</p>
+                    <p class="weather-state">多云</p>
+                    <p class=" weather-map"><img src="../images/weather-icon/W1.png"></p>
+                    <p class="forecast-temp">14°～24°</p>
+                </div>
+                <div class="flex-auto weather-time">
+                    <p class="week">周六</p>
+                    <p class="data-time">01月24日</p>
+                    <p class="weather-state">多云</p>
+                    <p class=" weather-map"><img src="../images/weather-icon/W1.png"></p>
+                    <p class="forecast-temp">14°～24°</p>
+                </div>
+                <div class="flex-auto weather-time">
+                    <p class="week">周日</p>
+                    <p class="data-time">01月24日</p>
+                    <p class="weather-state">多云</p>
+                    <p class=" weather-map"><img src="../images/weather-icon/W1.png"></p>
+                    <p class="forecast-temp">14°～24°</p>
+                </div>
+                <div class="flex-auto weather-time">
+                    <p class="week">周一</p>
+                    <p class="data-time">01月26日</p>
+                    <p class="weather-state">多云</p>
+                    <p class=" weather-map"><img src="../images/weather-icon/W1.png"></p>
+                    <p class="forecast-temp">14°～24°</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
