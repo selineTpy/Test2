@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .main {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url(../images/weather.png);
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+        }
+
+        /*上面部分div*/
+        .flex-top {
+            width: 1050px;
+            height: 480px;
+            /*border: 1px solid blueviolet;*/
+            margin: 0 auto;
+            margin-bottom: 160px;
+            position: relative;
+
+        }
+
+        /*上面部分左边div*/
+        .temperature {
+            width: 320px;
+            height: 180px;
+            /*border: 1px solid green;*/
+            position: absolute;
+            top: 50%;
+            margin-left: -90px;
+            left: 90px;
+        }
+
+        .weather-temp {
+            width: 160px;
+            height: 120px;
+            font-family: PingFangSC-Regular;
+            font-size: 120px;
+            color: #FFFFFF;
+            line-height: 120px;
+            margin-right: 4px;
+
+        }
+
+        .weather-forecast {
+            width: 72px;
+            height: 36px;
+            font-family: PingFangSC-Regular;
+            font-size: 36px;
+            color: #FFFFFF;
+            line-height: 36px;
+            margin-right: 12px;
+            margin-bottom: 42px;
+        }
+
+        .air-quality {
+            width: 60px;
+            height: 12px;
+            font-family: PingFangSC-Regular;
+            font-size: 12px;
+            color: #FFFFFF;
+            line-height: 12px;
+            background: rgba(137, 200, 24, 0.70);
+        }
+
+        .weather-wind {
+            width: 100px;
+            height: 28px;
+            font-family: PingFangSC-Medium;
+            font-size: 20px;
+            color: #FFFFFF;
+            margin-top: 30px;
+            margin-right: 50px;
+        }
+
+        .temperature-ratio {
+            width: 103px;
+            height: 28px;
+            font-family: PingFangSC-Medium;
+            font-size: 20px;
+            color: #FFFFFF;
+        }
+
+        /*上面div头部部分div*/
+        .top {
+            width: 240px;
+            height: 40px;
+            background: #FFFFFF;
+            box-shadow: 0 0 6px 0 #CCCCCC;
+            border-radius: 0 0 6px 6px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .flex-span {
+            font-family: PingFangSC-Medium;
+            font-size: 20px;
+            color: #CAD3E0;
+            align-content: center;
+            margin-left: 30px;
+
+        }
+
+        .span-city {
+            font-family: PingFangSC-Medium;
+            font-size: 20px;
+            color: #344665;
+            align-content: center;
+        }
+
+        .weather-image {
+            width: 172px;
+            height: 135px;
+            /*border: 1px solid burlywood;*/
+            float: right;
+            position: absolute;
+            top: 50%;
+            margin-left: -75px;
+            right: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .weather-image img {
+            width: 100%;
+            height: auto;
+        }
+
+        /*下面星期部分*/
+        .content {
+            width: 1050px;
+            height: 360px;
+            /*border: 1px solid red;*/
+            margin: 0 auto;
+        }
+
+        .flex-ver {
+            display: flex;
+
+        }
+
+        .flex-auto {
+            flex: auto;
+        }
+
+        .weather-time {
+            width: 150px;
+            background: #FFFFFF;
+
+        }
+
+        .p-time {
+            background: #EDF3FF;
+        }
+
+        .week {
+            font-family: PingFangSC-Medium;
+            font-size: 20px;
+            color: #344665;
+            margin-top: 30px;
+            margin-left: 51px;
+            margin-right: 59px;
+        }
+
+        .data-time {
+            font-family: PingFangSC-Medium;
+            font-size: 20px;
+            color: #CAD3E0;
+            margin-left: 32px;
+            margin-right: 33px;
+
+        }
+
+        .weather-state {
+            font-family: PingFangSC-Medium;
+            font-size: 20px;
+            color: #344665;
+            margin-top: 60px;
+            margin-left: 54.5px;
+            margin-right: 55.5px;
+        }
+
+        .weather-map {
+            margin-top: 43px;
+            margin-left: 43px;
+            margin-right: 53px;
+        }
+
+        .forecast-temp {
+            font-family: PingFangSC-Medium;
+            font-size: 20px;
+            color: #344665;
+            margin-top: 30px;
+            margin-left: 36px;
+            margin-right: 36px;
+            margin-bottom: 36px;
+        }
+    </style>
+</head>
+
+
+
+<body>
+    <div class="main">
+        <div class="flex-top">
+            <div class="temperature">
+                <p>
+                    <span class="weather-temp">18°</span>
+                    <span class="weather-forecast">小雨</span>
+                    <span class="air-quality">空气质量优</span>
+                </p>
+                <p>
+                    <span class="weather-wind">南风<三级</span> <span class="temperature-ratio">温度：70%</span>
+                </p>
+            </div>
+            <div class="top">
+                <span class="flex-span span-city">深圳</span>
+                <span class="flex-span">北京</span>
+                <span class="flex-span">上海</span>
+            </div>
+            <div class="weather-image"><img src="../images/weather-icon/W1.png"></div>
+        </div>
+        <div class="content" id="weather_tpl">
+            <script id="tmp" type="text/html">
+                <div class="flex-ver flex-wrap">
+                    {{each list as not i}}
+
+
+                    <div class="flex-auto weather-time  {{ i == 0 ? 'p-time' : ''}} ">
+                        {{if i == 0}}
+                        <p class="week">今天</p>
+                        {{else}}
+                        <p class="week">{{format('{"type": "format_week"}', not.predictDate)}}</p>
+                        {{/if}}
+                        <p class="data-time">{{format('{"type": "timestring", "format":"MM月dd日"}', not.predictDate)}}
+                        </p>
+                        <p class="weather-state">多云</p>
+                        <p class="weather-map"><img src="../images/weather-icon/W{{not.conditionIdDay}}.png"></p>
+                        <p class="forecast-temp">
+                            {{not.tempNight}}° ~
+                            {{not.tempDay}}°
+                        </p>
+                    </div>
+                    {{/each}}
+                </div>
+            </script>
+        </div>
+    </div>
+    <script src="../3rd/js/jquery-3.3.1.min.js"></script>
+    <script src="../3rd/js/template.js"></script>
+    <script src="../public/public.js"></script>
+    <script>
+        getWeateherInfo();
+
+        // 获取天气
+        function getWeateherInfo() {
+            //请求json数据
+            $.getJSON('../json/weather.json', function (data) {
+
+                data.today.condition.qul = getAirQul(data.today.air_qul.value);
+                var html = template("tmp", {
+                    //当前的天气
+                    current: data.today,
+                    list: data.list.forecast
+                });
+                $("#weather_tpl").html(html);
+            });
+        }
+
+        function getAirQul(score) {
+
+
+            if (!score) return "";
+            var qulTable = {
+                1: {
+                    color: "#549B23",
+                    desc: "优"
+                }, // 50
+                2: {
+                    color: "#549B23",
+                    desc: "良"
+                }, // 100
+                3: {
+                    color: "#995B23",
+                    desc: "轻度污染"
+                },
+                4: {
+                    color: "#995B23",
+                    desc: "轻度污染"
+                }, // 200
+                5: {
+                    color: "#991F23",
+                    desc: "中度污染"
+                },
+                6: {
+                    color: "#991F23",
+                    desc: "中度污染"
+                }, // 300
+                other: {
+                    color: "#991F23",
+                    desc: "重度污染"
+                }
+            };
+            return qulTable[Math.ceil(score / 50)] || table["others"];
+        }
+    </script>
+</body>
+
+</html>
