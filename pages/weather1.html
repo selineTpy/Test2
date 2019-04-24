@@ -27,7 +27,6 @@
             height: 480px;
             /*border: 1px solid blueviolet;*/
             margin: 0 auto;
-            margin-bottom: 160px;
             position: relative;
 
         }
@@ -174,6 +173,7 @@
             margin-top: 30px;
             margin-left: 51px;
             margin-right: 59px;
+            text-align: center;
         }
 
         .data-time {
@@ -182,6 +182,7 @@
             color: #CAD3E0;
             margin-left: 32px;
             margin-right: 33px;
+            text-align: center;
 
         }
 
@@ -192,12 +193,14 @@
             margin-top: 60px;
             margin-left: 54.5px;
             margin-right: 55.5px;
+            text-align: center;
         }
 
         .weather-map {
             margin-top: 43px;
             margin-left: 43px;
             margin-right: 53px;
+            text-align: center;
         }
 
         .forecast-temp {
@@ -208,6 +211,44 @@
             margin-left: 36px;
             margin-right: 36px;
             margin-bottom: 36px;
+            text-align: center;
+        }
+
+        /*兼容屏幕高度自适应*/
+        @media screen and (min-height: 900px) {
+            .flex-top {
+                margin-bottom: 20px;
+            }
+        }
+
+        @media screen and (min-height: 1080px) {
+            .flex-top {
+                margin-bottom: 70px;
+            }
+        }
+
+        @media screen and (min-height: 1200px) {
+            .flex-top {
+                margin-bottom: 130px;
+            }
+        }
+
+        @media screen and (min-height: 1300px) {
+            .flex-top {
+                margin-bottom: 180px;
+            }
+        }
+
+        @media screen and (min-height: 1440px) {
+            .flex-top {
+                margin-bottom: 250px;
+            }
+        }
+
+        @media screen and (min-height: 1540px) {
+            .flex-top {
+                margin-bottom: 290px;
+            }
         }
     </style>
 </head>
@@ -216,57 +257,129 @@
 
 <body>
     <div class="main">
-        <div class="flex-top">
-            <div class="temperature">
+        <div class="flex-top" id="top_wrap">
+
+        </div>
+        <div class="content" id="weather_tpl">
+
+        </div>
+    </div>
+    <!-- 实时简报模板 -->
+    <script id="briefcondition" type="text/html">
+        <div>
+            <!--精简实况-->
+            <div class="temperature" id="air_quality">
                 <p>
-                    <span class="weather-temp">18°</span>
-                    <span class="weather-forecast">小雨</span>
-                    <span class="air-quality">空气质量优</span>
+                    <span class="weather-temp">{{current.temp}}°</span>
+                    <span class="weather-forecast">{{current.condition}}</span>
+                    <span class="air-quality" style="color: {{current.qul_obj.color}}">
+                        空气质量{{current.qul_obj.desc}}</span>
                 </p>
+
                 <p>
                     <span class="weather-wind">南风<三级</span> <span class="temperature-ratio">温度：70%</span>
                 </p>
+
             </div>
+        </div>
+        <!-- 城市列表 -->
+        <div id="cityList">
             <div class="top">
-                <span class="flex-span span-city">深圳</span>
-                <span class="flex-span">北京</span>
-                <span class="flex-span">上海</span>
+                {{each list as city i}}
+                {{if i== 0}}
+                <span class="flex-span span-city">{{city.name}}</span>
+                {{else}}
+                <span class="flex-span ">{{city.name}}</span>
+                {{/if}}
+                {{/each}}
+            <div>
+        </div>
+        <!-- 天气图片 -->
+        <div class="weather-image"><img src="../images/weather-icon/W{{current.icon}}.png"></div>
+    </script>
+
+    <!--空气质量指数-->
+    <!--预报六天的数据-->
+    <script id="tmp" type="text/html">
+        <div class="flex-ver flex-wrap">
+            {{each list as not i}}
+            <div class="flex-auto weather-time  {{ i == 0 ? 'p-time' : ''}} ">
+                {{if i == 0}}
+                <p class="week">今天</p>
+                {{else}}
+                <p class="week">{{format('{"type": "format_week"}', not.predictDate)}}</p>
+                {{/if}}
+                <p class="data-time">{{format('{"type": "timestring", "format":"MM月dd日"}', not.predictDate)}}
+                </p>
+                <p class="weather-state">{{not.conditionDay}}</p>
+                <p class="weather-map"><img src="../images/weather-icon/W{{not.conditionIdDay}}.png"></p>
+                <p class="forecast-temp">
+                    {{not.tempNight}}° ~
+                    {{not.tempDay}}°
+                </p>
             </div>
-            <div class="weather-image"><img src="../images/weather-icon/W1.png"></div>
+            {{/each}}
         </div>
-        <div class="content" id="weather_tpl">
-            <script id="tmp" type="text/html">
-                <div class="flex-ver flex-wrap">
-                    {{each list as not i}}
-
-
-                    <div class="flex-auto weather-time  {{ i == 0 ? 'p-time' : ''}} ">
-                        {{if i == 0}}
-                        <p class="week">今天</p>
-                        {{else}}
-                        <p class="week">{{format('{"type": "format_week"}', not.predictDate)}}</p>
-                        {{/if}}
-                        <p class="data-time">{{format('{"type": "timestring", "format":"MM月dd日"}', not.predictDate)}}
-                        </p>
-                        <p class="weather-state">多云</p>
-                        <p class="weather-map"><img src="../images/weather-icon/W{{not.conditionIdDay}}.png"></p>
-                        <p class="forecast-temp">
-                            {{not.tempNight}}° ~
-                            {{not.tempDay}}°
-                        </p>
-                    </div>
-                    {{/each}}
-                </div>
-            </script>
-        </div>
-    </div>
+    </script>
+    <!--城市模板-->
+    <script id="city" type="text/html">
+        <div class="top">
+            {{each list as city i}}
+            {{if i== 0}}
+            <span class="flex-span span-city">{{city.name}}</span>
+            {{else}}
+            <span class="flex-span ">{{city.name}}</span>
+            {{/if}}
+            {{/each}}
+            <div>
+    </script>
     <script src="../3rd/js/jquery-3.3.1.min.js"></script>
     <script src="../3rd/js/template.js"></script>
     <script src="../public/public.js"></script>
     <script>
-        getWeateherInfo();
+        $(function () {
+            //获取最近一周的天气预报展示
+            getWeateherInfo();
+            //获取城市列表
+            gitCityList();
+            //获取精简数据
+            gitBriefcondition();
+        });
+        //获取精简数据
+        function gitBriefcondition() {
+            let list = [];
+            //请求json数据
+            $.getJSON('../json/briefcondition.json', function (briefcondition) {
+                /*天气质量*/
+                $.getJSON('../json/air_quality.json', function (air_quality) {
+                    // 城市列表
+                    $.getJSON('../json/citylist.json', function (citylist) {
+                        // 合并天气质量数据
+                        briefcondition.data.condition.qul_obj = getAirQul(air_quality.aqi.value)
+                        var data = {
+                            current: briefcondition.data.condition,
+                            list: citylist.citylists
+                        };
+                        console.log(data);
+                        var html = template("briefcondition", data);
+                        $("#top_wrap").html(html)
+                    })
+                });
+            })
+        }
 
-        // 获取天气
+        //获取城市列表
+        function gitCityList() {
+            //请求json数据
+            $.getJSON('../json/citylist.json', function (data) {
+                var html = template("city", {
+                    list: data.citylists
+                });
+                $("#cityList").html(html);
+            })
+        }
+
+        // 获取最近一周的天气预报展示
         function getWeateherInfo() {
             //请求json数据
             $.getJSON('../json/weather.json', function (data) {
@@ -280,10 +393,8 @@
                 $("#weather_tpl").html(html);
             });
         }
-
+        //请求判断数据的空气质量状态
         function getAirQul(score) {
-
-
             if (!score) return "";
             var qulTable = {
                 1: {

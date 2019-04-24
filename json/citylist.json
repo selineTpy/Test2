@@ -1,0 +1,7 @@
+{
+    "citylists":[
+        {"cityid":1,"name":"北京","last_time":1550000000},
+        {"cityid":2,"name":"上海","last_time":1550000000},
+        {"cityid":3,"name":"深圳","last_time":1550000000}
+    ]
+}

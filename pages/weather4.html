@@ -276,9 +276,9 @@
     <script id="city_temp" type="text/html">
         {{each list as city i}}
         {{if i== 0}}
-        <span class="flex-span span-city span-active" cityid="{{city.cityid}}">{{city.name}}</span>
+        <span class="flex-span span-city span-active" cityid="{{city.city_cache_id}}">{{city.city_cache_name}}</span>
         {{else}}
-        <span class="flex-span"  cityid="{{city.cityid}}">{{city.name}}</span>
+        <span class="flex-span" cityid="{{city.city_cache_id}}">{{city.city_cache_name}}</span>
         {{/if}}
         {{/each}}
     </script>
@@ -327,6 +327,10 @@
     <script src="../3rd/js/jquery-3.3.1.min.js"></script>
     <script src="../3rd/js/template.js"></script>
     <script src="../public/public.js"></script>
+    <!-- mock 开发调试 -->
+    <script src="../mockjs/mock-min.js"></script>
+    <script src="../mockjs/mock/weather.js"></script>
+
     <script>
         $(function () {
             loadPage()
@@ -335,10 +339,6 @@
         function loadPage() {
             //获取城市列表
             gitCityList();
-            //获取精简实况数据跟空气质量
-            gitBriefcondition();
-            //获取最近一周的天气预报展示
-            getWeateherInfo();
         }
 
         function reloadCityWeather(cityId) {
@@ -350,58 +350,163 @@
 
         //获取城市列表
         function gitCityList() {
-            //请求json数据
-            $.getJSON('../json/citylist.json', function (data) {
-                var html = template("city_temp", {
-                    list: data.citylists
-                });
-                $("#cityList").html(html);
-                //点击所选城市显示数据
-                //debugger;
-                $("#cityList span").click(function () {
-                    console.log("加载天气预报");
-                    $(this)
-                        .addClass("span-active")
-                        .siblings()
-                        .removeClass("span-active");
-                    var cityId = $(this).attr("cityid");
-                    alert(cityId);
-                    reloadCityWeather(cityId)
-                });
+            $.ajax({
+                url: '/api/fyweathers/citylists',
+                type: 'get',
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data)
+                    if (data.code === 0) {
+                        //将数据显示在模板页面
+                        var html = template("city_temp", {
+                            list: data.data
+                        });
+                        $("#cityList").html(html);
+                        //点击所选城市显示数据
+                        $("#cityList span").click(function () {
+                            //更换当前点击城市的选中的样式
+                            $(this)
+                                .addClass("span-active")
+                                .siblings()
+                                .removeClass("span-active");
+                            //获取当前选中的id
+                            var cityId = $(this).attr("cityid");
+                            
+                            //根据不同城市获取当前的精简实况数据跟最近一周的天气预报数据
+                            reloadCityWeather(cityId)
+                        });
+                        //触发当前城市列表的第一个城市
+                        $("#cityList span").eq(0).trigger("click");
+                    } else {
+                        alert('获取城市列表失败：' + data.msg)
+                    }
+                },
+                error: function (err, status, error) {
+                    alert('请求接口失败：' + status)
+                }
             })
+
+            // //请求城市列表
+            // $.getJSON('../json/citylist.json', function (data) {
+            // var html = template("city_temp", {
+            //     list: data.citylists
+            // });
+            // $("#cityList").html(html);
+            // //点击所选城市显示数据
+            // //debugger;
+            // $("#cityList span").click(function () {
+            //     console.log("加载天气预报");
+            //     $(this)
+            //         .addClass("span-active")
+            //         .siblings()
+            //         .removeClass("span-active");
+            //     var cityId = $(this).attr("cityid");
+            //     alert(cityId);
+            //     reloadCityWeather(cityId)
+            //     });
+            // })
         }
 
         //获取精简实况数据跟空气质量
         function gitBriefcondition(cityId) {
-            //请求json数据
-            $.getJSON('../json/briefcondition.json', function (briefcondition) {
-                $.getJSON('../json/air_quality.json', function (air_quality) {
-
-                    //合并天气质量数据
-                    briefcondition.data.condition.qul_obj = getAirQul(air_quality.aqi.value);
-                    var data = {
-                        current: briefcondition.data.condition
+            $.ajax({
+                //请求的接口
+                url: '/whapi/json/alicityweather/briefcondition',
+                type: 'get',
+                dataType: 'json',
+                // data: {
+                //     city_id: cityId
+                // },
+                success: function (briefcondition) {
+                    if (briefcondition.code === 0) {
+                        $.ajax({
+                            //请求的接口
+                            url: '/whapi/json/alicityweather/aqi',
+                            type: 'get',
+                            dataType: 'json',
+                            // data: {
+                            //     city_id: cityId
+                            // },
+                            success: function (air_quality) {
+                                console.log(data);
+                                if (air_quality.code === 0) {
+                                    //合并天气质量数据
+                                    briefcondition.data.condition.qul_obj = getAirQul(
+                                        air_quality.data.aqi.value);
+                                    var data = {
+                                        current: briefcondition.data.condition
+                                    }
+                                    //将获取的数据放入模板展示
+                                    var html = template("briefcondition", data);
+                                    $("#briefcondition_brief").html(html);
+                                }
+                            }
+                        });
+                    }else{
+                        alert('获取精简实况数据失败：' + data.msg);
                     }
-                    //将获取的数据放入模板展示
-                    var html = template("briefcondition", data);
-                    $("#briefcondition_brief").html(html);
-                });
+
+                },
+                error: function (err, status, error) {
+                    alert('请求接口失败：' + status)
+                }
             });
+            //请求json数据
+
+            // $.getJSON('../json/briefcondition.json', function (briefcondition) {
+            //     $.getJSON('../json/air_quality.json', function (air_quality) {
+
+            //         //合并天气质量数据
+            //         briefcondition.data.condition.qul_obj = getAirQul(air_quality.aqi.value);
+            //         var data = {
+            //             current: briefcondition.data.condition
+            //         }
+            //         //将获取的数据放入模板展示
+            //         var html = template("briefcondition", data);
+            //         $("#briefcondition_brief").html(html);
+            //     });
+            // });
         }
 
         // 获取最近一周的天气预报展示
         function getWeateherInfo(cityId) {
-            //请求json数据
-            $.getJSON('../json/weather.json', function (data) {
+            $.ajax({
+                url: '/whapi/json/alicityweather/briefforecast6days',
+                type: 'get',
+                // data: {
+                //     //城市id
+                //     city_id: cityId
+                // },
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    if (data.code === 0) {
+                        var html = template("weather_forecast", {
 
-                data.today.condition.qul = getAirQul(data.today.air_qul.value);
-                var html = template("weather_forecast", {
-                    //当前的天气
-                    current: data.today,
-                    list: data.list.forecast
-                });
-                $("#weather_tpl").html(html);
+                            list: data.data.forecast
+                        });
+                        $("#weather_tpl").html(html);
+
+                    } else {
+                        alert('获取最近一周的天气数据失败：' + data.msg);
+                    }
+
+                },
+                error: function (err, status, error) {
+                    alert('请求接口失败：' + status)
+                }
             });
+            //请求json数据
+            // $.getJSON('../json/weather.json', function (data) {
+            //     console.log(data);
+            //     //data.today.condition.qul = getAirQul(data.today.air_qul.value);
+            //     var html = template("weather_forecast", {
+            //         //当前的天气
+            //         //current: data.today,
+            //         list: data.data.forecast
+            //     });
+            //     $("#weather_tpl").html(html);
+            // });
         }
 
         //请求判断数据的空气质量状态

@@ -1,0 +1,19 @@
+{
+    "data": {
+        "city": {
+            "cityId": 284609,
+            "counname": "中国",
+            "name": "东城区",
+            "pname": "北京市"
+        },
+        "condition": {
+            "condition": "晴",
+            "humidity": "26",
+            "icon": "0",
+            "temp": "25",
+            "updatetime": "2016-09-01 09:35:00",
+            "windDir": "东北风",
+            "windLevel": "3"
+        }
+    }
+}
