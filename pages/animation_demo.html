@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>animation</title>
+    <style>
+        /* css3 animation */
+        @-webkit-keyframes moveFromRight {
+            from {
+                -webkit-transform: translateX(100%);
+            }
+        }
+
+        @-moz-keyframes moveFromRight {
+            from {
+                -moz-transform: translateX(100%);
+            }
+        }
+
+        @keyframes moveFromRight {
+            from {
+                transform: translateX(100%);
+            }
+        }
+
+
+        @-webkit-keyframes scaleDown {
+            to {
+                opacity: 0;
+                -webkit-transform: scale(.8);
+            }
+        }
+
+        @-moz-keyframes scaleDown {
+            to {
+                opacity: 0;
+                -moz-transform: scale(.8);
+            }
+        }
+
+        @keyframes scaleDown {
+            to {
+                opacity: 0;
+                transform: scale(.8);
+            }
+        }
+
+        /* scale and fade */
+
+        .pt-page-scaleDown {
+            -webkit-animation: scaleDown .7s ease both;
+            -moz-animation: scaleDown .7s ease both;
+            animation: scaleDown .7s ease both;
+        }
+
+        .pt-page-moveFromRight {
+            -webkit-animation: moveFromRight .6s ease both;
+            -moz-animation: moveFromRight .6s ease both;
+            animation: moveFromRight .6s ease both;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .col-wrap {
+            display: inline-block;
+            height: 100%;
+            width: 30%;
+            margin: 0 1.5%;
+            position: relative;
+        }
+
+        .col-item {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            background: darkcyan
+        }
+    </style>
+</head>
+
+
+
+<body>
+
+    <div class="col-wrap">
+        <div class="col-item"></div>
+
+    </div>
+    <div class="col-wrap">
+        <div class="col-item"></div>
+    </div>
+    <div class="col-wrap">
+        <div class="col-item"></div>
+    </div>
+
+    <div style="position: fixed; top: 100px; left: 300px;">
+        <button onclick="changeView()">切换</button>
+
+    </div>
+    <script src="../3rd/js/jquery-3.3.1.min.js"></script>
+    <script>
+        var $inClass = 'pt-page-moveFromRight';
+        var $outClass = 'pt-page-scaleDown';
+
+        function changeView() {
+            $(".col-item").each(function (i, elem) {
+                changeCol(elem);
+            })
+        }
+
+        function changeCol(elem) {
+            var $currCol = $(elem);
+            var $nextCol = $("<div class='col-item' style='background:red'></div>");
+            $currCol.after($nextCol);
+          
+            $currCol.on('animationend', function(){
+                console.log('animation event')
+                $currCol.off('animation')
+                $currCol.remove()
+            })
+            $nextCol.on('animationend', function(){
+                console.log('animation event')
+                $nextCol.off('animation')
+                $nextCol.attr("class", 'col-item')
+            })
+
+            $currCol.addClass($outClass);
+            $nextCol.addClass($inClass);
+        }
+    </script>
+</body>
+
+</html>

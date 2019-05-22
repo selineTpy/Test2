@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>动画切换</title>
+</head>
+<style>
+    .animation-div {
+       width: 400px;
+       height: 400px;
+       position: relative;
+       overflow: hidden;
+       background:#00cccc;
+    }
+    .qqq-div{
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+
+
+   
+</style>
+
+<body>
+    <div class="animation-div pt-page" id="animation_page">
+        <div id="qqq-div">内容</div>
+    </div>
+<script src="../3rd/js/jquery-3.3.1.min.js"></script>
+<script>
+    $(function(){
+       
+        $("#animation_page").animate({"left":500},500);
+        // $("#qqq-div").animate({"right":400},5000);
+
+    })
+   
+</script>
+</body>
+</html>
